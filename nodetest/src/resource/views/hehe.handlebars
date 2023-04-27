@@ -1,0 +1,47 @@
+{{> header}}>
+ <style>
+    .card-grid {
+      display: grid;
+      grid-template-columns: repeat(4, 1fr);
+      gap: 20px;
+    }
+
+    @media screen and (max-width: 1200px) {
+      .card-grid {
+        grid-template-columns: repeat(3, 1fr);
+      }
+    }
+
+    @media screen and (max-width: 900px) {
+      .card-grid {
+        grid-template-columns: repeat(2, 1fr);
+      }
+    }
+
+    @media screen and (max-width: 600px) {
+      .card-grid {
+        grid-template-columns: repeat(1, 1fr);
+      }
+    }
+
+    .card {
+      background-color: #f7f7f7;
+      border-radius: 10px;
+      box-shadow: 0px 0px 10px rgba(0, 0, 0, 0.1);
+      overflow: hidden;
+    }
+  </style>
+
+  <div class="card-grid">
+    {{#each items}}
+      <div class="card">
+        <img class="card-img-top" src="https://images.pexels.com/photos/19090/pexels-photo.jpg?cs=srgb&dl=pexels-web-donut-19090.jpg&fm=jpg" width="300" height="300" alt={{this.name}}>
+        <div class="card-body">
+          <h5 class="card-title">{{this.name}}</h5>
+          <p class="card-text">{{this.description}}</p>
+          <p class="card-text">{{this.gender}}</p>
+          <a href="/{{this._id}}" class="btn btn-primary">Go somewhere</a>
+        </div>
+      </div>
+    {{/each}}
+  </div>
