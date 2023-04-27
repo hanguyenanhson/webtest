@@ -2,7 +2,7 @@ const { model } = require("mongoose")
 const { findOne } = require("../model/item")
 const user = require('../model/user')
 const passport = require('passport');
-const LocalStrategy = require('passport-local').Strategy;
+
 class loginController {
     login(req,res) {
         const warning = req.query.warning || '';
@@ -10,17 +10,7 @@ class loginController {
         })
     }
     handleLogin(req, res) {
-        passport.use(new LocalStrategy(
-            function(username, password, done) {
-              // Tìm kiếm thông tin user trong cơ sở dữ liệu
-              User.findOne({ username: username }, function (err, user) {
-                if (err) { return done(err); }
-                if (!user) { return done(null, false); }
-                if (!user.verifyPassword(password)) { return done(null, false); }
-                return done(null, user);
-              });
-            }
-          ));
+        
         passport.authenticate('local', {
             successRedirect: '/',
             failureRedirect: '/login'
