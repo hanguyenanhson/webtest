@@ -2,11 +2,14 @@ const { now } = require('mongoose')
 const item = require('../model/item')
 class newsController {
     post(req,res) {
-        
+        const user = req.user
+        const isLoggedIn = !user
         item.find().then(items => {
             items = items.map(items => items.toObject())
             res.render('hehe',{
-                items
+                items : items,
+                isLoggedIn : isLoggedIn,
+                user : user
             })
         })
         .catch(err => {
@@ -35,7 +38,10 @@ class newsController {
         getItems(req, res) {
             item.findById(req.params._id)
               .then(items => {
-                res.render('details', {items : items.toObject()})
+                res.render('details', {
+                  items : items.toObject(),
+                  isLoggedIn : !!(req.user)
+                })
               })
               .catch(err => {
                 console.error(err);

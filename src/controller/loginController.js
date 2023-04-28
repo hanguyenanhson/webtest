@@ -10,11 +10,22 @@ class loginController {
         })
     }
     handleLogin(req, res, next) {
-       
         passport.authenticate('local', {
             successRedirect: '/',
-            failureRedirect: '/login'
-      })(req, res, next)
+            failureRedirect: '/login',
+            
+      })
+      (req, res, next => {
+        alert('đăng nhập thành công')
+      })
+    }
+    handleLogout(req,res) {
+        req.logout(function(err) {
+            if (err) { return next(err); }
+            req.session.isLoggedIn = false;
+        })
+        res.redirect('/')
+        
     }
     register(req,res) {
         const warning = req.query.warning || ''
@@ -37,7 +48,7 @@ class loginController {
                     password : req.body.password,
                     admin : is_admin
                 })
-                console.log("register thành công")
+                alert("register thành công")
                 res.redirect('/login')
             }
             else{
