@@ -2,19 +2,19 @@ const { model } = require("mongoose")
 const { findOne } = require("../model/item")
 const user = require('../model/user')
 const passport = require('passport');
-
+const LocalStrategy = require('passport-local').Strategy;
 class loginController {
     login(req,res) {
         const warning = req.query.warning || '';
         res.render('login',{warning
         })
     }
-    handleLogin(req, res) {
-        
+    handleLogin(req, res, next) {
+       
         passport.authenticate('local', {
             successRedirect: '/',
             failureRedirect: '/login'
-      })
+      })(req, res, next)
     }
     register(req,res) {
         const warning = req.query.warning || ''
