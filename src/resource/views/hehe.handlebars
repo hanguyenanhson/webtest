@@ -35,16 +35,11 @@
   <div class="card-grid">
     {{#each items}}
       <div class="card">
-  
-    {{#if isLoggedIn}}
-    {{!-- {{#if user.admin}} --}}
-    <div class="card-header">
-    <input type="checkbox" name="card-checkbox">
-    </div>
+    {{#if ../isAdmin}}
+    <a href="/" onclick = "deleteItem('{{this._id}}')">Delete</a>
     {{/if}}
-    {{!-- {{/if}} --}}
   
-  <img class="card-img-top" src="https://images.pexels.com/photos/19090/pexels-photo.jpg?cs=srgb&dl=pexels-web-donut-19090.jpg&fm=jpg" width="300" height="300" alt={{this.name}}>
+  <img class="card-img-top" src="{{this.image}}" width="300" height="300" alt={{this.name}}>
   <div class="card-body">
     <h5 class="card-title">{{this.name}}</h5>
     <p class="card-text">{{this.description}}</p>
@@ -54,3 +49,15 @@
 </div>
     {{/each}}
   </div>
+  <script>
+    function deleteItem(id) {
+  fetch('/delete/' + id, {
+    method: 'DELETE'
+  }).then(function(response) {
+    // Xử lý kết quả trả về từ yêu cầu xóa ở đây
+    window.location.reload(true);
+  }).catch(function(error) {
+    console.log('Không thể xóa mục: ', error);
+  });
+}
+  </script>

@@ -23,6 +23,18 @@ app.use(passport.session());
 // Cấu hình LocalStrategy
 
 db.connect()
+app.use(function(req, res, next) {
+  res.locals.isLoggedIn = req.user !== undefined;
+  next();
+});
+app.use(function(req, res, next) {
+  res.locals.isAdmin = req.user !== undefined && req.user.admin;
+  next();
+});
+app.use(function(req, res, next) {
+  res.locals.user = req.user
+  next();
+});
 passport.use('local', new LocalStrategy(
   function(username, password, done) {
     // Tìm kiếm thông tin user trong cơ sở dữ liệu

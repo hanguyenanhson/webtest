@@ -1,4 +1,4 @@
-const newsRouter = require('./newsRoute')
+const newsRouter = require('./newsRouter')
 const loginRouter = require('./loginRouter')
 function route(app) {
     app.use(loginRouter)

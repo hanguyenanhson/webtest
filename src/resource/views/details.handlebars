@@ -1,11 +1,12 @@
 {{> header}}
 <body>
+ 
     <h1>{{items.name}}</h1>
     <p>Mô tả sản phẩm:</p>
     <p>{{items.description}}</p>
     <img class="card-img-top" src="https://images.pexels.com/photos/19090/pexels-photo.jpg?cs=srgb&dl=pexels-web-donut-19090.jpg&fm=jpg" width="500" height="600" alt={{items.name}}>
     <button>Thêm vào giỏ hàng</button>
-    {{#if isLoggedIn}}
-    <button>chỉnh sửa</button>
+    {{#if isAdmin}}
+   <button onclick="window.location.href='/{{items._id}}/change'">Chỉnh sửa</button>
     {{/if}}
   </body>
