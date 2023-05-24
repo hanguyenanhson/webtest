@@ -2,14 +2,14 @@
  const router = express.Router()
  const newsController = require('../controller/newsController')
  router.get('/search',newsController.searchProducts)
- router.get('/:_id/change',newsController.createChangePage)
  router.get('/create', newsController.createProductPage)
  router.post('/create',newsController.createProduct)
- router.delete('/delete/:_id', newsController.delete)
- router.put('/:_id/change', newsController.update)
+ router.delete('/:_id/delete', newsController.delete)
  router.get('/news',newsController.index)
  router.get('/',newsController.post)
  router.get('/female',newsController.getByGender)
+ router.get('/:_id/change',newsController.createChangePage)
+ router.post('/:_id/change', newsController.update)
  router.get('/:_id',newsController.getItems)
  
  module.exports = router

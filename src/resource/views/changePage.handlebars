@@ -1,8 +1,9 @@
  {{>header}}
 <h1>Thay đổi</h1>
-<form id="create-product-form">
+<form id="create-product-form" method="POST" >
+  
   <label for="name">Tên sản phẩm:</label>
-  <input type="text" id="name" name="name"><br>
+  <input type="text" id="name" name="name" value=><br>
 
   <label for="gender">Giới tính:</label>
   <input type="text" id="gender" name="gender"><br>
@@ -10,24 +11,9 @@
   <label for="description">Mô tả:</label>
   <textarea id="description" name="description"></textarea><br>
 
-  <label for="image">Link ảnh:</label>
+  <label for="image">Link ảnh: </label>
   <input type="text" id="image" name="image"><br>
 
-  <button type="submit">Tạo sản phẩm</button>
+  <button type="submit" data-method="put" >Thay đổi sản phẩm</button>
 </form>
 
-<script>
-  const form = document.getElementById('create-product-form');
-  form.addEventListener('submit', (event) => {
-    event.preventDefault();
-    const formData = new FormData(form);
-    const url = '/products/1';
-    fetch(url, {
-      method: 'PUT',
-      body: formData
-    })
-    .then(response => response.json())
-    .then(data => console.log(data))
-    .catch(error => console.error(error));
-  });
-</script>

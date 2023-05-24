@@ -51,7 +51,7 @@
   </div>
   <script>
     function deleteItem(id) {
-  fetch('/delete/' + id, {
+  fetch('/'+id+'/delete', {
     method: 'DELETE'
   }).then(function(response) {
     // Xử lý kết quả trả về từ yêu cầu xóa ở đây

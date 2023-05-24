@@ -50,7 +50,6 @@ class newsController {
 
   delete(req, res) {
       item.findByIdAndDelete(req.params._id).then((result) => {
-          res.redirect('/delete/req.params._id')
           res.redirect('/')
       }).catch((err) => {
           console.log("Không delete được: ", err);
@@ -67,7 +66,7 @@ class newsController {
       res.render('changePage')
   }
   searchProducts = (req, res) => {
-      const keyword = req.query.search; // Lấy từ khóa được nhập vào trong thanh search từ query parameter "q"
+      const keyword = req.query.search; // Lấy từ khóa được nhập vào trong thanh search từ query parameter "search"
       const regex = new RegExp(keyword, 'i'); // Tạo regular expression để tìm kiếm các sản phẩm có tên tương tự
 
       item.find({
@@ -122,22 +121,25 @@ class newsController {
           });
   }
   update(req, res) {
-      item.updateMany({
-              image: {
-                  $exists: true
-              }
-          }, {
-              $set: {
-                  image: "anh.jpg"
-              }
-          })
-          .then(result => {
-              console.log("update thành công")
-          })
-          .catch(err => {
-              res.json("không update đc")
-          });
-
+    console.log('I AM HERE')
+    const update = {}
+    Object.keys(req.body).forEach((key) => {
+        if (req.body[key] !== '') {
+          update[key] = req.body[key];
+        }
+      });
+      console.log(update)
+      item.findByIdAndUpdate(req.params._id, update, {new:true}).then(result => {
+        console.log(result)
+        res.redirect('/')
+      })
+      .catch(err =>{
+        res.status(500).json({
+            message: 'Lỗi server'
+        })
+        console.log(err)
+      })
+      
   }
 }
 module.exports = new newsController
