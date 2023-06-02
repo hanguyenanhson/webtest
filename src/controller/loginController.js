@@ -1,9 +1,6 @@
 const {
     model
 } = require("mongoose")
-const {
-    findOne
-} = require("../model/item")
 const user = require('../model/user')
 const passport = require('passport');
 const LocalStrategy = require('passport-local').Strategy;

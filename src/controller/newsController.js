@@ -39,7 +39,8 @@ class newsController {
           name: req.body.name,
           gender: req.body.gender,
           description: req.body.description,
-          image: req.body.image
+          image: req.body.image,
+          price: parseInt(req.body.price)
       }).then(result => {
           console.log('tạo product thành công')
           res.redirect('/')
@@ -93,9 +94,10 @@ class newsController {
               gender: "female"
           }).then(items => {
               items = items.map(items => items.toObject())
-              res.render('hehe', {
-                  items
-              })
+            //   res.render('hehe', {
+            //       items
+            //   })
+            res.render('cart')
           })
           .catch(err => {
               console.log(err)
@@ -116,12 +118,11 @@ class newsController {
           .catch(err => {
               console.error(err);
               res.status(500).json({
-                  message: 'Lỗi server'
+                  message: 'Lỗi kết nối'
               });
           });
   }
   update(req, res) {
-    console.log('I AM HERE')
     const update = {}
     Object.keys(req.body).forEach((key) => {
         if (req.body[key] !== '') {

@@ -5,7 +5,9 @@
     <p>Mô tả sản phẩm:</p>
     <p>{{items.description}}</p>
     <img class="card-img-top" src={{items.image}} width="500" height="600" alt={{items.name}}>
-    <a href="/cart/{{items.id}}">Thêm vào giỏ hàng</a>
+    <form method="POST" action="/cart/{{items._id}}">
+  <button type="submit">Thêm vào giỏ hàng {{items._id}}</button>
+</form>
     {{#if isAdmin}}
    <button onclick="window.location.href='/{{items._id}}/change'">Chỉnh sửa</button>
     {{/if}}
